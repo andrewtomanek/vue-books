@@ -12,13 +12,15 @@
           class="search-box"
           placeholder="Enter search term"
         />
-        <label for="search-select">Select category</label>
-        <select name="searchCategory" id="search-select">
-          <option value="">--Please choose an option--</option>
-          <option value="All">All</option>
-          <option value="Author">Author</option>
-          <option value="Author and name">Author and name</option>
-          <option value="parrot">Category</option>
+        <label for="search-select">Select category{{ selected }}</label>
+        <select v-model="selected" name="searchCategory" id="search-select">
+          <option
+            v-for="option in options"
+            v-bind:value="option.value"
+            :key="option.text"
+          >
+            {{ option.text }}
+          </option>
         </select>
         <input type="checkbox" id="toggle" />
         <label for="toggle">Use regex</label>
@@ -33,6 +35,17 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "searchBooks",
+  data: function() {
+    return {
+      selected: "",
+      options: [
+        { text: "All", value: "All" },
+        { text: "Author", value: "Author" },
+        { text: "Author and name", value: "Author and name" },
+        { text: "Category", value: "Category" },
+      ],
+    };
+  },
   computed: Object.assign(
     {},
     {

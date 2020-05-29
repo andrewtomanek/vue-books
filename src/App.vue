@@ -1,16 +1,22 @@
 <template>
   <div id="app">
     <searchBooks class="mt-5"> </searchBooks>
+    <bookList />
+    <footerContainer />
   </div>
 </template>
 
 <script>
 import searchBooks from "./components/searchBooks.vue";
+import footerContainer from "./components/footerContainer.vue";
+import bookList from "./components/bookList.vue";
 
 export default {
   name: "App",
   components: {
     searchBooks,
+    bookList,
+    footerContainer,
   },
 };
 </script>

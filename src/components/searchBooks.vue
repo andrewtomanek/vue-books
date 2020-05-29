@@ -1,52 +1,38 @@
 <template>
-  <div>
-    <header>
-      <h1>Web library <br /></h1>
-      <div class="search-wrapper">
-        <form>
-          <input
-            type="text"
-            v-model="search"
-            aria-label="Search"
-            name="focus"
-            required
-            class="search-box"
-            placeholder="Enter search term"
-          />
-
-          <label for="search-select">Select category</label>
-          <select name="searchCategory" id="search-select">
-            <option value="">--Please choose an option--</option>
-            <option value="All">All</option>
-            <option value="Author">Author</option>
-            <option value="Author and name">Author and name</option>
-            <option value="parrot">Category</option>
-          </select>
-          <input type="checkbox" id="toggle" />
-          <label for="toggle">Use regex</label>
-          <button class="search-button" type="submit">Search</button>
-        </form>
-      </div>
-    </header>
-    <div class="main-content">
-      <section class="items-list">
-        <article contenteditable v-for="book in books" :key="book.indexId">
-          <bookDetail :book="book"></bookDetail>
-        </article>
-      </section>
+  <header>
+    <h1>Web library <br /></h1>
+    <div class="search-wrapper">
+      <form>
+        <input
+          type="text"
+          v-model="search"
+          aria-label="Search"
+          name="focus"
+          required
+          class="search-box"
+          placeholder="Enter search term"
+        />
+        <label for="search-select">Select category</label>
+        <select name="searchCategory" id="search-select">
+          <option value="">--Please choose an option--</option>
+          <option value="All">All</option>
+          <option value="Author">Author</option>
+          <option value="Author and name">Author and name</option>
+          <option value="parrot">Category</option>
+        </select>
+        <input type="checkbox" id="toggle" />
+        <label for="toggle">Use regex</label>
+        <button class="search-button" type="submit">Search</button>
+      </form>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
-import bookDetail from "./bookDetail";
 import { mapGetters } from "vuex";
 
 export default {
   name: "searchBooks",
-  components: {
-    bookDetail,
-  },
   computed: Object.assign(
     {},
     {

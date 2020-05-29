@@ -1,20 +1,20 @@
 <template>
   <footer>
-    <p>Count of searched items{{ books.length }}</p>
+    <p class="footer-text">
+      Count of searched items: {{ books.length }} / {{ allBooks.length }}
+    </p>
   </footer>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "footerContainer",
-  computed: Object.assign(
-    {},
-    {
-      ...mapGetters({ books: "filtersMovies" }),
-    }
-  ),
+  computed: {
+    ...mapState(["allBooks"]),
+    ...mapGetters({ books: "filtersMovies" }),
+  },
 };
 </script>
 
@@ -28,5 +28,15 @@ footer {
   width: 100%;
   background-color: var(--footer, orange);
   z-index: 10;
+}
+
+.footer-text {
+  margin: 0;
+  padding: 0.1rem 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  color: white;
+  grid-column: 1;
 }
 </style>

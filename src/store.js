@@ -11,6 +11,7 @@ console.log(books());
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
+    allBooks: bookData,
     books: books(),
     filter: {
       query: "",

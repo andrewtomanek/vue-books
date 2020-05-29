@@ -38,30 +38,31 @@ export default {
   justify-content: center;
 }
 
-a {
-  font-family: Helvetica, Arial, Verdana;
+article {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  background-color: var(--tile, skyblue);
+  border: solid 0.1rem var(--tile, skyblue);
+  transform: scale(1);
+  transition: all 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-button {
-  font-family: Helvetica, Arial, Verdana;
-  padding: 0.2rem;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  border: 0.1rem solid var(--tile, blue);
-  background-color: var(--secondary, blue);
-  color: white;
+article:hover {
+  transform: scale(1.01);
+  border: solid 0.1rem var(--secondary, red);
+  transition: all 400ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-h1 {
-  font-family: Helvetica, Arial, Verdana;
-  color: white;
-  text-align: center;
-  padding: 0.5rem 0.2rem;
-  font-size: 1.2rem;
-  font-weight: 800;
-  background-color: var(--header, black);
-  margin: 0;
+article:focus {
+  grid-column: 1 /-1;
+  height: 100%;
+}
+
+article:focus var {
+  display: block;
 }
 
 .items-list {

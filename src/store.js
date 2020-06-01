@@ -6,8 +6,6 @@ const books = () => {
   return bookData;
 };
 
-console.log(books());
-
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
@@ -28,7 +26,6 @@ const store = new Vuex.Store({
   },
   getters: {
     filtersMovies(state) {
-      console.log(state.filter.query);
       let books = state.books;
       if (state.filter.query.length > 2) {
         return books.filter((book) =>

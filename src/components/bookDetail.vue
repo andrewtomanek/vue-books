@@ -1,16 +1,24 @@
 <template>
-  <div class="data-box">
-    <figure>
-      <img :src="book.imgUrl" :alt="book.caption" />
-      <figcaption>{{ book.caption }}</figcaption>
-    </figure>
+  <div class="data-container">
     <h6>
       {{ book.name }}
     </h6>
-    <p class="book-text" data-type="indexId">{{ book.indexId }}</p>
-    <p class="book-text" data-type="author">{{ book.author }}</p>
-    <p class="book-text" data-type="categoryId">{{ book.categoryId }}</p>
-    <p class="book-text" data-type="category">{{ book.category }}</p>
+    <div class="content-box" v-if="idOpen === book.indexId && isOpen">
+      <div class="text-box">
+        <p class="book-text" data-type="indexId">indexId: {{ book.indexId }}</p>
+        <p class="book-text" data-type="author">author:{{ book.author }}</p>
+        <p class="book-text" data-type="categoryId">
+          categoryId: {{ book.categoryId }}
+        </p>
+        <p class="book-text" data-type="category">
+          category: {{ book.category }}
+        </p>
+      </div>
+      <figure>
+        <img :src="book.imgUrl" :alt="book.caption" />
+        <figcaption>{{ book.caption }}</figcaption>
+      </figure>
+    </div>
   </div>
 </template>
 
@@ -22,30 +30,55 @@ export default {
       type: Object,
       required: true,
     },
+    isOpen: {
+      type: Boolean,
+      required: true,
+    },
+    idOpen: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
 
 <style scoped>
-.data-box {
+.data-container {
   display: grid;
+  grid-auto-flow: row;
   justify-content: center;
   align-items: start;
-  grid-gap: 2rem;
+  grid-gap: 0.2rem;
+  padding: 0.5rem 0.2rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  grid-area: 1/1/3/3;
-  height: 100%;
-  width: 100%;
 }
 
-article:focus .data-box {
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 10vh repeat(4, 5vh);
+.content-box {
+  display: grid;
+  grid-area: 2/1/3/1;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 0.2rem;
+  padding: 0.5rem 0.2rem;
+}
+
+.text-box {
+  display: grid;
+  grid-area: 1/1/1/1;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  justify-content: center;
+  align-content: space-around;
+  padding: 0.5rem 0.2rem;
+  grid-gap: 2rem;
 }
 
 h6 {
   grid-column: 1 /-1;
+  grid-row: 1/1;
   text-align: center;
   font-size: 1rem;
   font-weight: 700;
@@ -53,12 +86,7 @@ h6 {
   height: auto;
 }
 
-article:focus h6 {
-  height: 50%;
-}
-
 .book-text {
-  display: none;
   margin: 0;
   padding: 0.1rem 0.3rem;
   font-size: 1rem;
@@ -68,32 +96,30 @@ article:focus h6 {
   grid-column: 1;
 }
 
-.book-text::before {
-  content: attr(data-type) ": ";
-  color: var(--secondary, blue);
-  padding: 1rem;
-}
-
-article:focus p {
-  display: block;
-}
-
-article:focus figure {
-  display: grid;
-}
-
 figure {
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  display: none;
   justify-content: center;
   align-items: center;
-  grid-area: 2/2/3/3;
+  padding: 0.5rem 0.2rem;
+  grid-area: 1/2/2/3;
   z-index: 1;
   color: var(--primary, firebrick);
 }
 
+figcaption {
+  margin: 0;
+  padding: 0.1rem 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text, brown);
+  grid-area: 1/2/2/3;
+}
+
 img {
-  width: 50%;
+  width: 100%;
+  grid-area: 1/1/1/1;
 }
 </style>

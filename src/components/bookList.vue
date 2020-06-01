@@ -1,8 +1,15 @@
 <template>
   <div class="main-content">
     <section class="items-list">
-      <article contenteditable v-for="book in books" :key="book.indexId">
-        <bookDetail :book="book"></bookDetail>
+      <article
+        class="article-wrap"
+        v-bind:class="{ open: idOpen === book.indexId && isOpen }"
+        @click="toggle(book.indexId)"
+        contenteditable
+        v-for="book in books"
+        :key="book.indexId"
+      >
+        <bookDetail :book="book" :isOpen="isOpen" :idOpen="idOpen"></bookDetail>
       </article>
     </section>
   </div>
@@ -16,6 +23,18 @@ export default {
   name: "bookList",
   components: {
     bookDetail,
+  },
+  data: function() {
+    return {
+      isOpen: false,
+      idOpen: "",
+    };
+  },
+  methods: {
+    toggle(id) {
+      this.idOpen = id;
+      this.isOpen = !this.isOpen;
+    },
   },
   computed: Object.assign(
     {},
@@ -32,17 +51,19 @@ export default {
   left: 0;
   top: 20vh;
   display: grid;
+  padding: 0.5rem 0.2rem;
   margin: 0;
   grid-auto-flow: row;
   align-items: center;
   justify-content: center;
 }
 
-article {
+.article-wrap {
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
+  padding: 0.5rem 0.2rem;
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   background-color: var(--tile, skyblue);
   border: solid 0.1rem var(--tile, skyblue);
@@ -50,19 +71,14 @@ article {
   transition: all 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-article:hover {
+.article-wrap:hover {
   transform: scale(1.01);
   border: solid 0.1rem var(--secondary, red);
   transition: all 400ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
-article:focus {
+.article-wrap.open {
   grid-column: 1 /-1;
-  height: 100%;
-}
-
-article:focus var {
-  display: block;
 }
 
 .items-list {

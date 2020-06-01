@@ -37,33 +37,32 @@ export default {
   name: "searchBooks",
   data: function() {
     return {
-      selected: "",
       options: [
-        { text: "All", value: "All" },
+        { text: "Name", value: "Name" },
         { text: "Author", value: "Author" },
-        { text: "Author and name", value: "Author and name" },
         { text: "Category", value: "Category" },
+        { text: "All", value: "All" },
       ],
     };
   },
   computed: Object.assign(
     {},
     {
-      ...mapGetters({ books: "filtersMovies" }),
+      ...mapGetters({ books: "filtersBooks" }),
       search: {
         get() {
-          return this.$store.state.filter.query;
+          return this.$store.state.query;
         },
         set(val) {
           this.$store.commit("setQuery", val);
         },
       },
-      available: {
+      selected: {
         get() {
-          return this.$store.state.filter.available;
+          return this.$store.state.selected;
         },
-        set() {
-          return this.$store.commit("setAvailable");
+        set(selected) {
+          return this.$store.commit("setSelected", selected);
         },
       },
     }

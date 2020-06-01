@@ -39,7 +39,7 @@ export default {
   computed: Object.assign(
     {},
     {
-      ...mapGetters({ books: "filtersMovies" }),
+      ...mapGetters({ books: "filtersBooks" }),
     }
   ),
 };

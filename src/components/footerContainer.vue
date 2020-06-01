@@ -13,7 +13,7 @@ export default {
   name: "footerContainer",
   computed: {
     ...mapState(["allBooks"]),
-    ...mapGetters({ books: "filtersMovies" }),
+    ...mapGetters({ books: "filtersBooks" }),
   },
 };
 </script>

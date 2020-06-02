@@ -68,7 +68,7 @@ export default {
   background-color: var(--tile, skyblue);
   border: solid 0.1rem var(--tile, skyblue);
   transform: scale(1);
-  transition: all 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: all 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
   cursor: pointer;
 }
 

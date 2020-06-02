@@ -8,7 +8,6 @@
           v-model="search"
           aria-label="Search"
           name="focus"
-          required
           class="search-box"
           placeholder="Enter search term"
         />
@@ -102,7 +101,13 @@ button {
   cursor: pointer;
   border: 0.1rem solid var(--tile, blue);
   background-color: var(--secondary, blue);
+  transition: all 200ms cubic-bezier(0.215, 0.61, 0.355, 1);
   color: white;
+}
+
+button:hover {
+  background-color: white;
+  color: var(--secondary, blue);
 }
 
 h1 {
@@ -138,7 +143,7 @@ form {
   margin: 0;
   padding: 0.1rem 0.3rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   text-align: left;
   color: var(--header, brown);
 }
@@ -150,14 +155,14 @@ form {
 
 .check-input {
   width: 100%;
+  height: 100%;
   border: 0.1rem solid #ccc;
   outline: 0;
   margin: 0;
   padding: 0.1rem 0.3rem;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: left;
-  color: var(--header, brown);
+  font-size: 2rem;
+  font-weight: 900;
+  cursor: pointer;
 }
 
 .search-select {
@@ -170,6 +175,7 @@ form {
   font-size: 1rem;
   font-weight: 700;
   text-align: left;
+  cursor: pointer;
 }
 
 .search-option {

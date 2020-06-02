@@ -13,41 +13,50 @@ const store = new Vuex.Store({
     books: books(),
     query: "",
     selected: "Name",
+    enabledRegex: false,
   },
   mutations: {
+    submitSearch(state, query) {
+      state.query = query;
+    },
     setQuery(state, query) {
       state.query = query;
     },
     setSelected(state, selected) {
       state.selected = selected;
     },
+    setRegex(state) {
+      state.enabledRegex = !state.enabledRegex;
+    },
   },
   getters: {
     filtersBooks(state) {
+      function testExistence(bookContent) {
+        const str = bookContent.toLowerCase();
+        if (state.enabledRegex) {
+          const regex = RegExp(state.query, "g");
+          return regex.test(str);
+        } else {
+          return str.includes(state.query);
+        }
+      }
+
       let books = state.books;
       if (state.query.length > 2) {
         switch (state.selected) {
           case "Name":
-            return books.filter((book) =>
-              book.name.toLowerCase().includes(state.query)
-            );
+            return books.filter((book) => testExistence(book.name));
           case "Author":
-            return books.filter((book) =>
-              book.author.toLowerCase().includes(state.query)
-            );
+            return books.filter((book) => testExistence(book.author));
           case "Category":
-            return books.filter((book) =>
-              book.category.toLowerCase().includes(state.query)
-            );
+            return books.filter((book) => testExistence(book.category));
           case "All": {
             let categorySearch = books.filter((book) =>
-              book.author.toLowerCase().includes(state.query)
+              testExistence(book.author)
             );
-            let nameSearch = books.filter((book) =>
-              book.name.toLowerCase().includes(state.query)
-            );
+            let nameSearch = books.filter((book) => testExistence(book.name));
             let authorSearch = books.filter((book) =>
-              book.category.toLowerCase().includes(state.query)
+              testExistence(book.category)
             );
             return [
               ...new Set([...nameSearch, ...authorSearch, ...categorySearch]),

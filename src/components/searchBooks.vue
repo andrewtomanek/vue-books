@@ -2,7 +2,7 @@
   <header>
     <h1>Web library <br /></h1>
     <div class="search-wrapper">
-      <form>
+      <form v-on:submit.prevent="submitSearch">
         <input
           type="text"
           v-model="search"
@@ -12,7 +12,7 @@
           class="search-box"
           placeholder="Enter search term"
         />
-        <label for="search-select">Select category{{ selected }}</label>
+        <label for="search-select">Select category</label>
         <select v-model="selected" name="searchCategory" id="search-select">
           <option
             v-for="option in options"
@@ -22,7 +22,12 @@
             {{ option.text }}
           </option>
         </select>
-        <input type="checkbox" id="toggle" />
+        <input
+          class="check-input"
+          type="checkbox"
+          v-model="toggleRegex"
+          :value="false"
+        />
         <label for="toggle">Use regex</label>
         <button class="search-button" type="submit">Search</button>
       </form>
@@ -45,6 +50,11 @@ export default {
       ],
     };
   },
+  methods: {
+    submitSearch() {
+      this.$store.commit("submitSearch", this.$store.state.query);
+    },
+  },
   computed: Object.assign(
     {},
     {
@@ -63,6 +73,14 @@ export default {
         },
         set(selected) {
           return this.$store.commit("setSelected", selected);
+        },
+      },
+      toggleRegex: {
+        get() {
+          return this.$store.state.enabledRegex;
+        },
+        set() {
+          return this.$store.commit("setRegex");
         },
       },
     }
@@ -142,8 +160,6 @@ h1 {
   grid-template-rows: auto;
   grid-gap: 0.5rem;
   padding: 0.5rem 0.2rem;
-  height: 100%;
-  width: 100%;
   justify-content: center;
   background-color: var(--grey, lightgrey);
 }

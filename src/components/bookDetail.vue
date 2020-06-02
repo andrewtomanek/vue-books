@@ -6,7 +6,7 @@
     <div class="content-box" v-if="idOpen === book.indexId && isOpen">
       <div class="text-box">
         <p class="book-text" data-type="indexId">indexId: {{ book.indexId }}</p>
-        <p class="book-text" data-type="author">author:{{ book.author }}</p>
+        <p class="book-text" data-type="author">author: {{ book.author }}</p>
         <p class="book-text" data-type="categoryId">
           categoryId: {{ book.categoryId }}
         </p>
@@ -49,7 +49,7 @@ export default {
   justify-content: center;
   align-items: start;
   grid-gap: 0.2rem;
-  padding: 0.5rem 0.2rem;
+  padding: 0.5rem 0.6rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
@@ -83,12 +83,12 @@ h6 {
   font-size: 1rem;
   font-weight: 700;
   color: var(--primary, firebrick);
-  height: auto;
+  height: 100%;
 }
 
 .book-text {
   margin: 0;
-  padding: 0.1rem 0.3rem;
+  padding: 0.2rem 0.5rem;
   font-size: 1rem;
   font-weight: 600;
   text-align: left;

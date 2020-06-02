@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <searchBooks class="mt-5"> </searchBooks>
+    <searchBooks />
     <bookList />
     <footerContainer />
   </div>

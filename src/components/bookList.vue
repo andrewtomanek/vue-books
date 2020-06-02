@@ -62,13 +62,14 @@ export default {
   display: grid;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 0.2rem;
+  padding: 0.1rem 0.2rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   background-color: var(--tile, skyblue);
   border: solid 0.1rem var(--tile, skyblue);
   transform: scale(1);
   transition: all 1200ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  cursor: pointer;
 }
 
 .article-wrap:hover {

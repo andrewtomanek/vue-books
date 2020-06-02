@@ -12,9 +12,9 @@
           class="search-box"
           placeholder="Enter search term"
         />
-        <label for="search-select">Select category</label>
-        <select v-model="selected" name="searchCategory" id="search-select">
+        <select v-model="selected" name="searchCategory" class="search-select">
           <option
+            class="search-option"
             v-for="option in options"
             v-bind:value="option.value"
             :key="option.text"
@@ -42,6 +42,7 @@ export default {
   name: "searchBooks",
   data: function() {
     return {
+      search: "",
       options: [
         { text: "Name", value: "Name" },
         { text: "Author", value: "Author" },
@@ -52,21 +53,13 @@ export default {
   },
   methods: {
     submitSearch() {
-      this.$store.commit("submitSearch", this.$store.state.query);
+      this.$store.commit("submitSearch", this.search);
     },
   },
   computed: Object.assign(
     {},
     {
       ...mapGetters({ books: "filtersBooks" }),
-      search: {
-        get() {
-          return this.$store.state.query;
-        },
-        set(val) {
-          this.$store.commit("setQuery", val);
-        },
-      },
       selected: {
         get() {
           return this.$store.state.selected;
@@ -101,32 +94,6 @@ header {
   z-index: 9;
 }
 
-.main-content {
-  position: absolute;
-  left: 0;
-  top: 20vh;
-  display: grid;
-  margin: 0;
-  grid-auto-flow: row;
-  align-items: center;
-  justify-content: center;
-}
-
-footer {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  display: grid;
-  height: 5vh;
-  width: 100%;
-  background-color: var(--footer, orange);
-  z-index: 10;
-}
-
-a {
-  font-family: Helvetica, Arial, Verdana;
-}
-
 button {
   font-family: Helvetica, Arial, Verdana;
   padding: 0.2rem;
@@ -142,42 +109,27 @@ h1 {
   font-family: Helvetica, Arial, Verdana;
   color: white;
   text-align: center;
-  padding: 0.5rem 0.2rem;
-  font-size: 1.2rem;
+  padding: 0.3rem 0.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
   background-color: var(--header, black);
   margin: 0;
 }
 
-.layout-container {
-  height: 100%;
-  width: 100%;
-}
-
-.items-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  grid-gap: 0.5rem;
-  padding: 0.5rem 0.2rem;
-  justify-content: center;
-  background-color: var(--grey, lightgrey);
-}
-
 form {
   display: grid;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  grid-gap: 1rem;
-  grid-template-columns: 2fr 1fr 1fr 1vw 1fr 1fr;
+  grid-gap: 2rem;
+  grid-template-columns: 2fr 1fr 1vw 1fr 1fr;
   grid-template-rows: 1fr;
 }
 
 .search-wrapper {
+  display: grid;
+  align-items: center;
   margin: 0;
   padding: 0.3rem 0.6rem;
-  justify-content: center;
-  align-items: center;
 }
 .search-box {
   width: 100%;
@@ -190,9 +142,41 @@ form {
   text-align: left;
   color: var(--header, brown);
 }
+
 .search-box:focus {
   box-shadow: 0 0 15px 5px var(--grey, grey);
   border: 0.1rem solid var(--secondary, blue);
+}
+
+.check-input {
+  width: 100%;
+  border: 0.1rem solid #ccc;
+  outline: 0;
+  margin: 0;
+  padding: 0.1rem 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  color: var(--header, brown);
+}
+
+.search-select {
+  width: 100%;
+  height: 100%;
+  border: 0.1rem solid #ccc;
+  outline: 0;
+  margin: 0;
+  padding: 0.1rem 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.search-option {
+  padding: 0.1rem 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
 }
 
 label {

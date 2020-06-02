@@ -3,7 +3,10 @@ import Vuex from "vuex";
 import bookData from "./data/booksArray.json";
 
 const books = () => {
-  return bookData;
+  let alphaSorted = bookData.sort(function(a, b) {
+    return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+  });
+  return alphaSorted;
 };
 
 Vue.use(Vuex);
@@ -42,7 +45,7 @@ const store = new Vuex.Store({
       }
 
       let books = state.books;
-      if (state.query.length > 2) {
+      if (state.query.length > 0) {
         switch (state.selected) {
           case "Name":
             return books.filter((book) => testExistence(book.name));

@@ -49,7 +49,7 @@ export default {
   justify-content: center;
   align-items: start;
   grid-gap: 0.2rem;
-  padding: 0.5rem 0.6rem;
+  padding: 0.1rem 0.6rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
@@ -62,7 +62,7 @@ export default {
   justify-content: center;
   align-items: center;
   grid-gap: 0.2rem;
-  padding: 0.5rem 0.2rem;
+  padding: 0.3rem 0.2rem;
 }
 
 .text-box {
@@ -72,7 +72,7 @@ export default {
   grid-template-rows: repeat(4, 1fr);
   justify-content: center;
   align-content: space-around;
-  padding: 0.5rem 0.2rem;
+  padding: 0.1rem 0.2rem;
   grid-gap: 2rem;
 }
 
@@ -80,10 +80,11 @@ h6 {
   grid-column: 1 /-1;
   grid-row: 1/1;
   text-align: center;
+  padding: 0.3rem 0.2rem;
+  margin: 0;
   font-size: 1rem;
   font-weight: 700;
   color: var(--primary, firebrick);
-  height: 100%;
 }
 
 .book-text {

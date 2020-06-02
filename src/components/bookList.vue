@@ -70,6 +70,7 @@ export default {
   transform: scale(1);
   transition: all 500ms cubic-bezier(0.215, 0.61, 0.355, 1);
   cursor: pointer;
+  overflow: hidden;
 }
 
 .article-wrap:hover {
@@ -88,9 +89,8 @@ export default {
   grid-template-rows: auto;
   grid-gap: 0.5rem;
   padding: 0.5rem 0.2rem;
-  height: 100%;
-  width: 100%;
   justify-content: center;
   background-color: var(--grey, lightgrey);
+  overflow: hidden;
 }
 </style>

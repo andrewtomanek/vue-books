@@ -115,7 +115,7 @@ h1 {
   color: white;
   text-align: center;
   padding: 0.3rem 0.2rem;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 800;
   background-color: var(--header, black);
   margin: 0;

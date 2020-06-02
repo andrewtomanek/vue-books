@@ -27,9 +27,9 @@ export default {
   --header: hsla(200, 10%, 10%, 1);
   --grey: hsla(200, 30%, 90%, 1);
   --tile: hsla(200, 60%, 80%, 1);
-  --primary: hsla(46, 91%, 42%, 1);
+  --primary: hsla(46, 80%, 40%, 1);
   --secondary: hsla(200, 80%, 60%, 1);
-  --text: hsla(46, 82%, 28%, 1);
+  --text: hsla(26, 72%, 28%, 1);
   --footer: hsla(16, 82%, 28%, 1);
   --alert: hsla(13, 77%, 52%, 1);
 }

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Web library <br /></h1>
+    <h1>Web library</h1>
     <div class="search-wrapper">
       <form @submit.prevent="submitSearch">
         <input
@@ -8,10 +8,10 @@
           v-model="search"
           aria-label="Search"
           name="focus"
-          class="search-box"
+          class="search-field"
           placeholder="Enter search term"
         />
-        <select v-model="selected" name="searchCategory" class="search-select">
+        <select v-model="selected" class="search-select">
           <option
             class="search-option"
             v-for="option in options"
@@ -35,8 +35,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "searchBooks",
   data: function() {
@@ -56,7 +54,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({ books: "filtersBooks" }),
     selected: {
       get() {
         return this.$store.state.selected;
@@ -123,7 +120,7 @@ form {
   justify-content: space-around;
   align-items: center;
   grid-gap: 2rem;
-  grid-template-columns: 2fr 1fr 1vw 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
 }
 
@@ -133,7 +130,7 @@ form {
   margin: 0;
   padding: 0.3rem 0.6rem;
 }
-.search-box {
+.search-field {
   width: 100%;
   border: 0.1rem solid #ccc;
   outline: 0;
@@ -145,7 +142,7 @@ form {
   color: var(--header, brown);
 }
 
-.search-box:focus {
+.search-field:focus {
   box-shadow: 0 0 15px 5px var(--grey, grey);
   border: 0.1rem solid var(--secondary, blue);
 }
@@ -183,8 +180,9 @@ form {
 }
 
 label {
-  display: block;
   padding: 0.1rem 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
   color: white;
 }
 </style>

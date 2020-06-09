@@ -5,13 +5,21 @@
     </h6>
     <div class="content-box" v-if="idOpen === book.indexId && isOpen">
       <div class="text-box">
-        <p class="book-text" data-type="indexId">indexId: {{ book.indexId }}</p>
-        <p class="book-text" data-type="author">author: {{ book.author }}</p>
+        <p class="data-label" data-type="indexId">indexId:</p>
+        <p class="book-text" data-type="indexId">{{ book.indexId }}</p>
+        <p class="data-label" data-type="author">author:</p>
+        <p class="book-text" data-type="author">{{ book.author }}</p>
+        <p class="data-label" data-type="categoryId">
+          categoryId:
+        </p>
         <p class="book-text" data-type="categoryId">
-          categoryId: {{ book.categoryId }}
+          {{ book.categoryId }}
+        </p>
+        <p class="data-label" data-type="category">
+          category:
         </p>
         <p class="book-text" data-type="category">
-          category: {{ book.category }}
+          {{ book.category }}
         </p>
       </div>
       <figure>
@@ -68,7 +76,7 @@ export default {
 .text-box {
   display: grid;
   grid-area: 1/1/1/1;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 3fr;
   grid-template-rows: repeat(4, 1fr);
   justify-content: center;
   align-content: space-around;
@@ -87,14 +95,24 @@ h6 {
   color: var(--primary, firebrick);
 }
 
-.book-text {
+.data-label {
   margin: 0;
-  padding: 0.2rem 0.5rem;
+  padding: 0.1rem 0.2rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   text-align: left;
   color: var(--text, brown);
   grid-column: 1;
+}
+
+.book-text {
+  margin: 0;
+  padding: 0.1rem 0.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  color: var(--primary, brown);
+  grid-column: 2;
 }
 
 figure {

@@ -5,7 +5,6 @@
         class="article-wrap"
         :class="{ open: idOpen === book.indexId && isOpen }"
         @click="toggle(book.indexId)"
-        contenteditable
         v-for="book in books"
         :key="book.indexId"
       >
@@ -73,7 +72,6 @@ export default {
 .article-wrap:hover {
   transform: scale(1.01);
   border: solid 0.1rem var(--secondary, red);
-  transition: all 400ms cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 .article-wrap.open {

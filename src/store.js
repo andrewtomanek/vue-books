@@ -36,8 +36,9 @@ const store = new Vuex.Store({
     filtersBooks(state) {
       function testExistence(bookContent) {
         const str = bookContent.toLowerCase();
+        const queryStrring = state.query.toLowerCase();
         if (state.enabledRegex) {
-          const regex = RegExp(state.query, "g");
+          const regex = RegExp(queryStrring, "g");
           return regex.test(str);
         } else {
           return str.includes(state.query);
@@ -55,11 +56,11 @@ const store = new Vuex.Store({
             return books.filter((book) => testExistence(book.category));
           case "All": {
             let categorySearch = books.filter((book) =>
-              testExistence(book.author)
+              testExistence(book.category)
             );
             let nameSearch = books.filter((book) => testExistence(book.name));
             let authorSearch = books.filter((book) =>
-              testExistence(book.category)
+              testExistence(book.author)
             );
             return [
               ...new Set([...nameSearch, ...authorSearch, ...categorySearch]),

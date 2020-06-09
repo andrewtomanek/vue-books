@@ -3,7 +3,7 @@
     <section class="items-list">
       <article
         class="article-wrap"
-        v-bind:class="{ open: idOpen === book.indexId && isOpen }"
+        :class="{ open: idOpen === book.indexId && isOpen }"
         @click="toggle(book.indexId)"
         contenteditable
         v-for="book in books"
@@ -36,12 +36,9 @@ export default {
       this.isOpen = !this.isOpen;
     },
   },
-  computed: Object.assign(
-    {},
-    {
-      ...mapGetters({ books: "filtersBooks" }),
-    }
-  ),
+  computed: {
+    ...mapGetters({ books: "filtersBooks" }),
+  },
 };
 </script>
 

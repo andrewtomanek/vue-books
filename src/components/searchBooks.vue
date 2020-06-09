@@ -2,7 +2,7 @@
   <header>
     <h1>Web library <br /></h1>
     <div class="search-wrapper">
-      <form v-on:submit.prevent="submitSearch">
+      <form @submit.prevent="submitSearch">
         <input
           type="text"
           v-model="search"
@@ -15,7 +15,7 @@
           <option
             class="search-option"
             v-for="option in options"
-            v-bind:value="option.value"
+            :value="option.value"
             :key="option.text"
           >
             {{ option.text }}
@@ -55,28 +55,25 @@ export default {
       this.$store.commit("submitSearch", this.search);
     },
   },
-  computed: Object.assign(
-    {},
-    {
-      ...mapGetters({ books: "filtersBooks" }),
-      selected: {
-        get() {
-          return this.$store.state.selected;
-        },
-        set(selected) {
-          return this.$store.commit("setSelected", selected);
-        },
+  computed: {
+    ...mapGetters({ books: "filtersBooks" }),
+    selected: {
+      get() {
+        return this.$store.state.selected;
       },
-      toggleRegex: {
-        get() {
-          return this.$store.state.enabledRegex;
-        },
-        set() {
-          return this.$store.commit("setRegex");
-        },
+      set(selected) {
+        return this.$store.commit("setSelected", selected);
       },
-    }
-  ),
+    },
+    toggleRegex: {
+      get() {
+        return this.$store.state.enabledRegex;
+      },
+      set() {
+        return this.$store.commit("setRegex");
+      },
+    },
+  },
 };
 </script>
 

@@ -1,19 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import bookData from "./data/booksArray.json";
-
-const books = () => {
-  let alphaSorted = bookData.sort(function(a, b) {
-    return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-  });
-  return alphaSorted;
-};
+import { sortAlpha, confirmExistence, sortInputFirst } from "./utils/helpers";
 
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     allBooks: bookData,
-    books: books(),
+    books: sortAlpha(bookData),
     query: "",
     selected: "Name",
     enabledRegex: false,
@@ -34,36 +28,46 @@ const store = new Vuex.Store({
   },
   getters: {
     filtersBooks(state) {
+      const queryString = state.query.toLowerCase();
       function testExistence(bookContent) {
-        const str = bookContent.toLowerCase();
-        const queryStrring = state.query.toLowerCase();
-        if (state.enabledRegex) {
-          const regex = RegExp(queryStrring, "g");
-          return regex.test(str);
-        } else {
-          return str.includes(state.query);
-        }
+        return confirmExistence(bookContent, queryString, state.enabledRegex);
       }
 
       let books = state.books;
       if (state.query.length > 0) {
         switch (state.selected) {
-          case "Name":
-            return books.filter((book) => testExistence(book.name));
-          case "Author":
-            return books.filter((book) => testExistence(book.author));
-          case "Category":
-            return books.filter((book) => testExistence(book.category));
-          case "All": {
-            let categorySearch = books.filter((book) =>
+          case "Name": {
+            let filteredArray = books.filter((book) =>
+              testExistence(book.name)
+            );
+            return sortInputFirst(queryString, filteredArray, "name");
+          }
+          case "Author": {
+            let filteredArray = books.filter((book) =>
+              testExistence(book.author)
+            );
+            return sortInputFirst(queryString, filteredArray, "author");
+          }
+          case "Category": {
+            let filteredArray = books.filter((book) =>
               testExistence(book.category)
             );
+            return sortInputFirst(queryString, filteredArray, "category");
+          }
+          case "All": {
             let nameSearch = books.filter((book) => testExistence(book.name));
             let authorSearch = books.filter((book) =>
               testExistence(book.author)
             );
+            let categorySearch = books.filter((book) =>
+              testExistence(book.category)
+            );
             return [
-              ...new Set([...nameSearch, ...authorSearch, ...categorySearch]),
+              ...new Set([
+                ...sortInputFirst(queryString, nameSearch, "name"),
+                ...sortInputFirst(queryString, authorSearch, "author"),
+                ...sortInputFirst(queryString, categorySearch, "category"),
+              ]),
             ];
           }
           default:
